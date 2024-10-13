@@ -41,7 +41,6 @@
             justify-content: center;
             align-items: center;
             text-align: center;
-            z-index: 2;
         }
 
         h1 {
@@ -81,8 +80,7 @@
             transition: all 0.3s ease;
             text-decoration: none;
             display: inline-block;
-            position: relative;
-            z-index: 3;
+            z-index: 3; /* Ensure the button is on top */
         }
 
         .cta-button:hover {
@@ -191,7 +189,7 @@
             <h1>AI Agents Domain For Sale</h1>
             <p class="tagline">Pioneering the Future of Intelligent Automation</p>
             <a href="#contact" class="cta-button">Secure This Domain</a>
-            <svg id="ai-network" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid meet"></svg>
+            <svg id="ai-network" width="100%" height="100%"></svg>
         </header>
 
         <div class="content">
@@ -232,19 +230,18 @@
     <script>
     // AI Network Animation
     const svg = document.getElementById('ai-network');
-    const svgRect = svg.getBoundingClientRect();
-    const aspectRatio = svgRect.width / svgRect.height;
     const nodeCount = 50;
     const nodes = [];
     const connections = [];
 
     function createNetwork() {
-        const width = 1000;
-        const height = 1000;
+        const width = svg.clientWidth;
+        const height = svg.clientHeight;
+        console.log('SVG dimensions:', width, height);
 
         for (let i = 0; i < nodeCount; i++) {
             const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-            circle.setAttribute('r', '4');
+            circle.setAttribute('r', '2');
             circle.setAttribute('fill', '#00ffff');
             svg.appendChild(circle);
             nodes.push({ 
@@ -261,7 +258,7 @@
                 if (Math.random() < 0.1) {
                     const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
                     line.setAttribute('stroke', '#00ffff');
-                    line.setAttribute('stroke-width', '1');
+                    line.setAttribute('stroke-width', '0.5');
                     svg.appendChild(line);
                     connections.push({ el: line, start: nodes[i], end: nodes[j] });
                 }
@@ -269,32 +266,32 @@
         }
 
         // Set initial positions
-        nodes.forEach((node) => {
+        nodes.forEach((node, index) => {
             node.originalX = node.x;
             node.originalY = node.y;
             node.el.setAttribute('cx', node.x);
             node.el.setAttribute('cy', node.y);
+            if (index < 5) console.log(`Node ${index} position:`, node.x, node.y);
         });
 
-        updateConnections();
+        connections.forEach(conn => {
+            conn.el.setAttribute('x1', conn.start.x);
+            conn.el.setAttribute('y1', conn.start.y);
+            conn.el.setAttribute('x2', conn.end.x);
+            conn.el.setAttribute('y2', conn.end.y);
+        });
     }
 
     function updateNetwork(mouseX, mouseY) {
-        const svgRect = svg.getBoundingClientRect();
-        const scaleX = 1000 / svgRect.width;
-        const scaleY = 1000 / svgRect.height;
-
-        mouseX *= scaleX;
-        mouseY *= scaleY;
-
+        console.log('Updating network:', mouseX, mouseY);
         nodes.forEach(node => {
             const dx = mouseX - node.originalX;
             const dy = mouseY - node.originalY;
             const distance = Math.sqrt(dx * dx + dy * dy);
-            const maxDistance = 200;
+            const maxDistance = 300;
 
             if (distance < maxDistance) {
-                const force = (1 - distance / maxDistance) * 40;
+                const force = (1 - distance / maxDistance) * 60;
                 node.x = node.originalX - (dx / distance) * force;
                 node.y = node.originalY - (dy / distance) * force;
             } else {
@@ -306,10 +303,6 @@
             node.el.setAttribute('cy', node.y);
         });
 
-        updateConnections();
-    }
-
-    function updateConnections() {
         connections.forEach(conn => {
             conn.el.setAttribute('x1', conn.start.x);
             conn.el.setAttribute('y1', conn.start.y);
@@ -320,11 +313,32 @@
 
     createNetwork();
 
+    // Ensure the SVG is positioned correctly and can receive events
+    svg.style.position = 'absolute';
+    svg.style.top = '0';
+    svg.style.left = '0';
+    svg.style.width = '100%';
+    svg.style.height = '100%';
+    svg.style.pointerEvents = 'auto';
+    svg.style.zIndex = '1';
+
+    // Add a visible cursor follower for debugging
+    const cursorFollower = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    cursorFollower.setAttribute('r', '5');
+    cursorFollower.setAttribute('fill', 'red');
+    svg.appendChild(cursorFollower);
+
     function handleMouseMove(event) {
         const rect = svg.getBoundingClientRect();
-        const mouseX = (event.clientX - rect.left) / rect.width;
-        const mouseY = (event.clientY - rect.top) / rect.height;
-        updateNetwork(mouseX * 1000, mouseY * 1000);
+        const mouseX = event.clientX - rect.left;
+        const mouseY = event.clientY - rect.top;
+        console.log('Mouse move:', mouseX, mouseY);
+        
+        // Update cursor follower
+        cursorFollower.setAttribute('cx', mouseX);
+        cursorFollower.setAttribute('cy', mouseY);
+        
+        updateNetwork(mouseX, mouseY);
     }
 
     svg.addEventListener('mousemove', handleMouseMove);
@@ -335,16 +349,13 @@
     });
 
     svg.addEventListener('mouseleave', () => {
+        console.log('Mouse leave');
         updateNetwork(-1000, -1000);
     });
 
-    // Resize handler
-    window.addEventListener('resize', () => {
-        const svgRect = svg.getBoundingClientRect();
-        const newAspectRatio = svgRect.width / svgRect.height;
-        if (Math.abs(newAspectRatio - aspectRatio) > 0.1) {
-            createNetwork();
-        }
+    // Test event listener
+    svg.addEventListener('click', (event) => {
+        console.log('SVG clicked at:', event.clientX, event.clientY);
     });
 
     // GSAP Animations
@@ -388,6 +399,6 @@
     });
 
     console.log('Network visualization script fully loaded and executed');
-    </script>
+    </script>   
 </body>
 </html>
