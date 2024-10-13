@@ -385,18 +385,50 @@
     const emailDisplay = document.getElementById('email-display');
     const copyButton = document.getElementById('copy-button');
 
-    copyButton.addEventListener('click', () => {
-        navigator.clipboard.writeText(emailDisplay.textContent)
+    function fallbackCopyTextToClipboard(text) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.top = "0";
+        textArea.style.left = "0";
+        textArea.style.position = "fixed";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+
+        try {
+            document.execCommand('copy');
+            copyButton.textContent = 'Copied!';
+        } catch (err) {
+            console.error('Fallback: Oops, unable to copy', err);
+            copyButton.textContent = 'Error!';
+        }
+
+        document.body.removeChild(textArea);
+    }
+
+    function copyTextToClipboard(text) {
+        if (!navigator.clipboard) {
+            fallbackCopyTextToClipboard(text);
+            return;
+        }
+        navigator.clipboard.writeText(text)
             .then(() => {
                 copyButton.textContent = 'Copied!';
-                setTimeout(() => {
-                    copyButton.textContent = 'Copy Email';
-                }, 2000);
             })
-            .catch(err => {
-                console.error('Failed to copy text: ', err);
+            .catch((err) => {
+                console.error('Async: Could not copy text: ', err);
+                fallbackCopyTextToClipboard(text);
             });
+    }
+
+    copyButton.addEventListener('click', () => {
+        const emailText = emailDisplay.textContent;
+        copyTextToClipboard(emailText);
+        setTimeout(() => {
+            copyButton.textContent = 'Copy Email';
+        }, 2000);
     });
+
 
     console.log('Network visualization script fully loaded and executed');
     </script>   
