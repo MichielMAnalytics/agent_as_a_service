@@ -3,53 +3,402 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Domain For Sale</title>
+    <title>AI Agents Domain | Future of Intelligence</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+
+        :root {
+            --primary-color: #00ffff;
+            --secondary-color: #ff00ff;
+            --bg-color: #000033;
+            --text-color: #ffffff;
+        }
+
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            position: relative;
+            height: 100vh;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            background-color: #f4f4f4;
-        }
-        .container {
             text-align: center;
-            background-color: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
+
         h1 {
-            color: #333;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: glow 2s ease-in-out infinite alternate;
         }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 5px var(--primary-color), 0 0 10px var(--primary-color);
+            }
+            to {
+                text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color), 0 0 30px var(--primary-color);
+            }
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            padding: 1rem 2rem;
+            background-color: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            z-index: 3; /* Ensure the button is on top */
+        }
+
+        .cta-button:hover {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px var(--primary-color);
+        }
+
+        #ai-network {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .content {
+            margin-top: 4rem;
+        }
+
+        h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
         p {
-            color: #666;
+            font-size: 1.1rem;
+            line-height: 1.6;
             margin-bottom: 1rem;
         }
-        .cta {
-            display: inline-block;
-            background-color: #007bff;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
-        .cta:hover {
-            background-color: #0056b3;
+
+        .feature-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 255, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        #email-display {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.2rem;
+            margin-top: 2rem;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            display: inline-block;
+        }
+
+        #copy-button {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            background-color: var(--secondary-color);
+            color: var(--bg-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 1rem;
+        }
+
+        #copy-button:hover {
+            background-color: var(--primary-color);
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+
+            .tagline {
+                font-size: 1.2rem;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Domain For Sale</h1>
-        <p>This premium domain is currently available for purchase.</p>
-        <p>Interested in owning this domain? Contact us now!</p>
-        <a href="mailto:michiel@melchioranalytics.com" class="cta">Contact Us</a>
+        <header>
+            <h1>AI Agents Domain For Sale</h1>
+            <p class="tagline">Pioneering the Future of Intelligent Automation</p>
+            <a href="#contact" class="cta-button">Secure This Domain</a>
+            <svg id="ai-network" width="100%" height="100%"></svg>
+        </header>
+
+        <div class="content">
+            <h2>Why This Domain Matters</h2>
+            <p>In the rapidly evolving landscape of artificial intelligence, "AI Agents" represents the pinnacle of autonomous systems. This domain is your gateway to the forefront of AI innovation, positioning you as a leader in the next generation of intelligent technologies.</p>
+
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Launch Pad</h3>
+                    <p>Ideal for startups pushing the boundaries of AI agent technology.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🌐</div>
+                    <h3>Global Reach</h3>
+                    <p>Connect with a worldwide audience interested in AI agents.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💡</div>
+                    <h3>Innovation Hub</h3>
+                    <p>Create a central platform for AI agent research and development.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Marketplace</h3>
+                    <p>Build the go-to marketplace for AI agent technologies and services.</p>
+                </div>
+            </div>
+
+            <h2 id="contact">Ready to Own the Future?</h2>
+            <p>Contact us to discuss acquisition opportunities:</p>
+            <div id="email-display">michiel@melchioranalytics.com</div>
+            <button id="copy-button">Copy Email</button>
+        </div>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script>
+    // AI Network Animation
+    const svg = document.getElementById('ai-network');
+    const nodeCount = 50;
+    const nodes = [];
+    const connections = [];
+
+    function createNetwork() {
+        const width = svg.clientWidth;
+        const height = svg.clientHeight;
+        console.log('SVG dimensions:', width, height);
+
+        for (let i = 0; i < nodeCount; i++) {
+            const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+            circle.setAttribute('r', '2');
+            circle.setAttribute('fill', '#00ffff');
+            svg.appendChild(circle);
+            nodes.push({ 
+                el: circle, 
+                x: Math.random() * width, 
+                y: Math.random() * height,
+                originalX: 0,
+                originalY: 0
+            });
+        }
+
+        for (let i = 0; i < nodeCount; i++) {
+            for (let j = i + 1; j < nodeCount; j++) {
+                if (Math.random() < 0.1) {
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('stroke', '#00ffff');
+                    line.setAttribute('stroke-width', '0.5');
+                    svg.appendChild(line);
+                    connections.push({ el: line, start: nodes[i], end: nodes[j] });
+                }
+            }
+        }
+
+        // Set initial positions
+        nodes.forEach((node, index) => {
+            node.originalX = node.x;
+            node.originalY = node.y;
+            node.el.setAttribute('cx', node.x);
+            node.el.setAttribute('cy', node.y);
+            if (index < 5) console.log(`Node ${index} position:`, node.x, node.y);
+        });
+
+        connections.forEach(conn => {
+            conn.el.setAttribute('x1', conn.start.x);
+            conn.el.setAttribute('y1', conn.start.y);
+            conn.el.setAttribute('x2', conn.end.x);
+            conn.el.setAttribute('y2', conn.end.y);
+        });
+    }
+
+    function updateNetwork(mouseX, mouseY) {
+        console.log('Updating network:', mouseX, mouseY);
+        nodes.forEach(node => {
+            const dx = mouseX - node.originalX;
+            const dy = mouseY - node.originalY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const maxDistance = 300;
+
+            if (distance < maxDistance) {
+                const force = (1 - distance / maxDistance) * 60;
+                node.x = node.originalX - (dx / distance) * force;
+                node.y = node.originalY - (dy / distance) * force;
+            } else {
+                node.x = node.originalX;
+                node.y = node.originalY;
+            }
+
+            node.el.setAttribute('cx', node.x);
+            node.el.setAttribute('cy', node.y);
+        });
+
+        connections.forEach(conn => {
+            conn.el.setAttribute('x1', conn.start.x);
+            conn.el.setAttribute('y1', conn.start.y);
+            conn.el.setAttribute('x2', conn.end.x);
+            conn.el.setAttribute('y2', conn.end.y);
+        });
+    }
+
+    createNetwork();
+
+    // Ensure the SVG is positioned correctly and can receive events
+    svg.style.position = 'absolute';
+    svg.style.top = '0';
+    svg.style.left = '0';
+    svg.style.width = '100%';
+    svg.style.height = '100%';
+    svg.style.pointerEvents = 'auto';
+    svg.style.zIndex = '1';
+
+    // Add a visible cursor follower for debugging
+    const cursorFollower = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    cursorFollower.setAttribute('r', '5');
+    cursorFollower.setAttribute('fill', 'red');
+    svg.appendChild(cursorFollower);
+
+    function handleMouseMove(event) {
+        const rect = svg.getBoundingClientRect();
+        const mouseX = event.clientX - rect.left;
+        const mouseY = event.clientY - rect.top;
+        console.log('Mouse move:', mouseX, mouseY);
+        
+        // Update cursor follower
+        cursorFollower.setAttribute('cx', mouseX);
+        cursorFollower.setAttribute('cy', mouseY);
+        
+        updateNetwork(mouseX, mouseY);
+    }
+
+    svg.addEventListener('mousemove', handleMouseMove);
+    svg.addEventListener('touchmove', (e) => {
+        e.preventDefault();
+        const touch = e.touches[0];
+        handleMouseMove(touch);
+    });
+
+    svg.addEventListener('mouseleave', () => {
+        console.log('Mouse leave');
+        updateNetwork(-1000, -1000);
+    });
+
+    // Test event listener
+    svg.addEventListener('click', (event) => {
+        console.log('SVG clicked at:', event.clientX, event.clientY);
+    });
+
+    // GSAP Animations
+    gsap.from('h1', { duration: 1.5, y: 50, opacity: 0, ease: 'power3.out', delay: 0.5 });
+    gsap.from('.tagline', { duration: 1.5, y: 50, opacity: 0, ease: 'power3.out', delay: 1 });
+    gsap.from('.cta-button', { duration: 1.5, y: 50, opacity: 0, ease: 'power3.out', delay: 1.5 });
+
+    // Animate feature items on scroll
+    const featureItems = document.querySelectorAll('.feature-item');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                gsap.from(entry.target, {
+                    duration: 1,
+                    y: 50,
+                    opacity: 0,
+                    ease: 'power3.out'
+                });
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.1 });
+
+    featureItems.forEach((item) => observer.observe(item));
+
+    // Email Copy Functionality
+    const emailDisplay = document.getElementById('email-display');
+    const copyButton = document.getElementById('copy-button');
+
+    copyButton.addEventListener('click', () => {
+        navigator.clipboard.writeText(emailDisplay.textContent)
+            .then(() => {
+                copyButton.textContent = 'Copied!';
+                setTimeout(() => {
+                    copyButton.textContent = 'Copy Email';
+                }, 2000);
+            })
+            .catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+    });
+
+    console.log('Network visualization script fully loaded and executed');
+    </script>   
 </body>
 </html>
